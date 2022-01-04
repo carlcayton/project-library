@@ -1,0 +1,55 @@
+{
+   "booksInfo":[
+      {
+         "id":1,
+         "title": "Pride and Prejudice",
+         "author": "Jane Austen",
+         "rating": 2,
+         "tags":["Sci-fi", "Horror"],
+         "pageCount": 99,
+         "pageCompleted": 81
+      },
+      {
+         "id": 2,
+         "title": "1984",
+         "author": "George Orwell",
+         "rating": 3,
+         "tags": ["Sci-fi", "Horror"],
+         "pageCount": 130,
+         "pageCompleted": 81
+      },
+      {
+         "id": 3,
+         "title": "The Great Gatsby",
+         "author": "F. Scott Fitzgerald",
+         "rating": 2,
+         "tags": ["Sci-fi", "Horror"],
+         "pageCount": 150,
+         "pageCompleted": 81
+      },
+      {
+         "id": 4,
+         "title": "Pride and Prejudice",
+         "author": "Jane Austen",
+         "rating": 2,
+         "pageCount": 99,
+         "pageCompleted": 81
+      },
+      {
+         "id": 5,
+         "title": "Pride and Prejudice",
+         "author": "Jane Austen",
+         "rating": 2,
+         "pageCount": 99,
+         "pageCompleted": 81
+      },
+      {
+         "id": 6,
+         "title": "Pride and Prejudice",
+         "author": "Jane Austen",
+         "rating": 2,
+         "pageCount": 99,
+         "pageCompleted": 81
+      }
+   ]
+}
