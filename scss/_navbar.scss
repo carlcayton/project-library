@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Monofett&display=swap");
 
-$bottom-shadow: -4px 5px 2px -2px rgba(0, 0, 0, 0.2);
+$bottom-shadow: 3px 5px 2px -2px rgba(0, 0, 0, 0.2);
 $logo-font: "Monofett", sans-serif;
 
 * {
@@ -23,16 +23,11 @@ $logo-font: "Monofett", sans-serif;
 }
 
 nav {
-  background-image: linear-gradient(to right, #ef32d9, #89fffd);
   display: flex;
-
+  background-image: linear-gradient(to right, #ef32d9, #89fffd);
   padding: 10px 40px 10px 70px;
   box-shadow: $bottom-shadow;
-  height: 100%;
-  display: flex;
-  list-style: none;
-  flex-wrap: wrap;
-  align-items: center;
+  height: 60px;
   justify-content: space-between;
 }
 
