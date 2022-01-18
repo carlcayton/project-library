@@ -35,7 +35,6 @@ async function renderBooks() {
       <span class="book-pageCount">
       ${book.pageCount} Pages
       </span>
-      
       `
       $('.grid-container').append(
          bookContainer

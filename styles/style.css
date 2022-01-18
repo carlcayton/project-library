@@ -124,11 +124,44 @@ nav .search-bar span {
   color: orange;
 }
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-  position: relative;
+.modal-container {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal {
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  max-width: 100%;
+  width: 400px;
+}
+
+.modal-form .modal-star-container input {
+  display: none;
+}
+
+.modal-form .modal-star-container label {
+  font: 40px;
+  color: #444;
+  padding: 10px;
+  float: right;
+}
+
+.modal-form .modal-star-container input:not(:checked) ~ label:hover,
+.modal-form .modal-star-container input:not(:checked) ~ label:hover ~ label {
+  color: #fd4;
 }
 
 .grid-container {
@@ -138,7 +171,7 @@ body {
       grid-template-columns: repeat(auto-fit, 180px);
   grid-auto-rows: 200px;
   height: 100%;
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
   grid-gap: 3em;
 }

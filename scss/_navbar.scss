@@ -29,26 +29,27 @@ nav {
   box-shadow: $bottom-shadow;
   height: 60px;
   justify-content: space-between;
+
+  .search-bar  {
+    height: 35px;
+    width: 40%;
+    display: flex;
+    box-shadow: $bottom-shadow;
+    border-radius: 5px;
+
+      input {
+        height: 100%;
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 0 10px;
+        color: #8c8281;
+        font-size: 16px;
+        border-radius: 5px;
+      }
+  }
 }
 
-nav .search-bar {
-  height: 35px;
-  width: 40%;
-  display: flex;
-  box-shadow: $bottom-shadow;
-  border-radius: 5px;
-}
-
-nav .search-bar input {
-  height: 100%;
-  width: 100%;
-  border: none;
-  outline: none;
-  padding: 0 10px;
-  color: #8c8281;
-  font-size: 16px;
-  border-radius: 5px;
-}
 
 nav .search-bar span {
   height: 100%;
