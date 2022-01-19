@@ -23,7 +23,7 @@
    <br>
    <div class="main-container">
       <div class="grid-container">
-         <div class="book-card">
+         <div class="book-card" id="add-book-card">
             <span class="fas fa-plus fa-7x"></span>
          </div>
       </div>
@@ -36,38 +36,43 @@
             <div class="modal-header">
                <h3>Book Info</h3>
             </div>
-            <form class="modal-form">
-               <div>
-                  <label for="title" class="modal-label">Title</label>
-                  <input type="text" id="title-input" placeholder="Enter Title">
-               </div>
-               <div>
-                  <label for="author" class="modal-label">Author</label>
-                  <input type="text" id="author-input" placeholder="Enter Author">
-               </div>
-               <span>Rating</span>
-               <div class="modal-star-container">
-                  <input type="radio" name="rate" id="rate-5">
-                  <label for="rate-5" class="fas fa-star"></label>
-                  <input type="radio" name="rate" id="rate-4">
-                  <label for="rate-4" class="fas fa-star"></label>
-                  <input type="radio" name="rate" id="rate-3">
-                  <label for="rate-3" class="fas fa-star"></label>
-                  <input type="radio" name="rate" id="rate-2">
-                  <label for="rate-2" class="fas fa-star"></label>
-                  <input type="radio" name="rate" id="rate-1">
-                  <label for="rate-1" class="fas fa-star"></label>
-               </div>
-               <div>
-                  <label for="pageCount">Page Count</label>
-                  <input type="number" min="1" id="pageCount" placeholder="Enter Password">
-               </div>
-               <div>
-                  <label for="pageCompleted">Page Completed</label>
-                  <input type="number" min="1" id="pageCompleted" placeholder="Enter Page Completed">
-               </div>
-               <input type="submit" value="Submit" class="submit-btn">
-            </form>
+            <div class="modal-content">
+               <form class="modal-form" id="modal-form">
+                  <div>
+                     <label for="title" class="modal-label">Title</label>
+                     <input type="text" id="title-input" placeholder="Enter Title" class="form-input" required>
+                  </div>
+                  <div>
+                     <label for="author" class="modal-label">Author</label>
+                     <input type="text" id="author-input" placeholder="Enter Author" class="form-input" required>
+                  </div>
+
+                  <div class="modal-star-container">
+                     <div class="modal-label">Rating</div>
+                     <input type="radio" name="rate" id="rate-1">
+                     <label for="rate-1" class="fas fa-star"></label>
+                     <input type="radio" name="rate" id="rate-2">
+                     <label for="rate-2" class="fas fa-star"></label>
+                     <input type="radio" name="rate" id="rate-3">
+                     <label for="rate-3" class="fas fa-star"></label>
+                     <input type="radio" name="rate" id="rate-4">
+                     <label for="rate-4" class="fas fa-star"></label>
+                     <input type="radio" name="rate" id="rate-5">
+                     <label for="rate-5" class="fas fa-star"></label>
+                  </div>
+                  <div>
+                     <label for="pageCount" class="modal-label">Page Count</label>
+                     <input type="number" min="1" id="pageCount" placeholder="Enter Page Count"
+                        class="form-input number-input">
+                  </div>
+                  <div>
+                     <label for="pageCompleted" class="modal-label">Page Completed</label>
+                     <input type="number" min="1" id="pageCompleted" placeholder="Enter Page Completed"
+                        class="form-input number-input">
+                  </div>
+                  <input type="submit" value="Submit" class="submit-btn">
+               </form>
+            </div>
          </div>
       </div>
 

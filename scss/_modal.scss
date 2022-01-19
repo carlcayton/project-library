@@ -1,11 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Monofett&family=Montserrat:wght@100;300;400&display=swap");
+
 .modal-container {
   background-color: rgba(0, 0, 0, 0.6);
-  //   display: none;
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.modal-container.show-modal {
+  display: block;
 }
 
 .modal {
@@ -21,8 +27,57 @@
   width: 400px;
 }
 
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 1.5%;
+  margin-right: 2.5%;
+  color: #fff;
+  cursor: pointer;
+}
+
+.modal-header {
+  background-color: #461e52;
+  color: #fff;
+  padding: 15px;
+}
+
+.modal-content {
+  padding: 20px;
+  // align-items: start;
+}
+
 .modal-form {
+  .modal-label {
+    display: block;
+    margin-bottom: 5px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  div {
+    margin: 15px 0;
+
+    .form-input {
+      padding: 8px;
+      width: 100%;
+    }
+
+    .number-input {
+      width: 60%;
+    }
+  }
+
   .modal-star-container {
+    display: inline-block;
+    margin-top: -10%;
+    margin-bottom: -1%;
+
     input {
       display: none;
     }
@@ -30,9 +85,10 @@
     label {
       font: 40px;
       color: #444;
-      padding: 10px;
+      padding-right: 7px;
       float: right;
       transition: all 0.2s ease;
+      align-self: flex-start;
     }
 
     input:not(:checked) ~ label:hover,
@@ -42,5 +98,17 @@
     input:checked ~ label {
       color: #fd4;
     }
+  }
+
+  button,
+  input[type="submit"] {
+    color: #ffffff;
+    background-color: #dd517e;
+    font-family: "Montserrat", sans-serif;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    padding: 8px 12px;
   }
 }
