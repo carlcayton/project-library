@@ -26,3 +26,22 @@
 #add-book-card {
   cursor: pointer;
 }
+
+.book-card-btns-container {
+  justify-content: end;
+  justify-self: end;
+  align-items: flex-end;
+  text-align: right;
+  margin-top: -10%;
+}
+
+.edit-btn,
+.delete-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  .fas fa-edit {
+    height: 10px;
+    width: 30px;
+  }
+}

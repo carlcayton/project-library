@@ -4,9 +4,10 @@ import Book from './classes/Book.js'
 const localStorageLibrary = JSON.parse(localStorage.getItem('myLibrary'))
 
 let myLibrary = localStorageLibrary !== null ? localStorageLibrary : await addBooksFromDBToLibrary();
-console.log(myLibrary);
 updateLocalStorage()
-renderBooks();
+renderAllBooks();
+
+let currentlyEditingBookID = null;
 
 
 async function addBooksFromDBToLibrary() {
@@ -23,7 +24,6 @@ async function addBooksFromDBToLibrary() {
       )
       bookArray.push(newBook)
    }
-   console.log(typeof bookArray);
    return bookArray
 }
 
@@ -32,11 +32,70 @@ function addBookFromInputFormToLibrary(newBook) {
    myLibrary.push(newBook)
 }
 
-async function renderBooks() {
+function saveBookEditToLibrary(book) {
+   myLibrary = myLibrary.map(obj => (obj.id === book.id ? book : obj))
+   // ; (obj.id !== book.id ? obj : book)
+
+}
+
+async function renderAllBooks() {
+   //Remove all elements except add-book-card and its children
+   $(".grid-container > *:not('#add-book-card')").remove()
    for (let book of myLibrary) {
-      const bookContainer = document.createElement('div')
-      bookContainer.classList.add('book-card')
-      bookContainer.innerHTML = `
+      renderBook(book)
+   }
+
+}
+
+function updateLocalStorage() {
+   localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
+}
+
+function bindEditAndDeleteFunc(book) {
+   let editBtn = document.getElementById(`edit-${book.id}`)
+   editBtn.addEventListener('click', editBook, false)
+   editBtn.myParam = book;
+
+   let deleteBtn = document.getElementById(`delete-${book.id}`)
+   deleteBtn.addEventListener(`click`, deleteBook, false)
+   deleteBtn.myParam = book;
+}
+
+function editBook(event) {
+   let book = event.currentTarget.myParam;
+   $('.modal-container').addClass('show-modal');
+   $('#title-input').val(book.title)
+   $('#author-input').val(book.author);
+   $('#pageCount').val(book.pageCount)
+   $('#pageCompleted').val(book.pageCompleted)
+   currentlyEditingBookID = book.id
+}
+
+function deleteBook(event) {
+   let book = event.currentTarget.myParam;
+
+}
+
+
+
+
+/** 
+ * Append book to the grid container
+*/
+async function renderBook(book) {
+
+   const bookContainer = document.createElement('div')
+   bookContainer.classList.add('book-card')
+   bookContainer.innerHTML = `
+      <div class="book-card-btns-container">
+         <button class="edit-btn" id="edit-${book.id}"
+          title="Edit Book" >
+            <i class="fas fa-edit"></i>
+         </button>
+         <button class="delete-btn" id="delete-${book.id}" title="Delete Book">
+            <i class="fas fa-trash"></i>
+         </button>
+      </div>
       <h3 class="book-title">${book.title}</h3>
       <h4 class="book-author">${book.author}</h4>
       ${await createStarsContainer(book.stars)}
@@ -44,15 +103,15 @@ async function renderBooks() {
       ${book.pageCount} Pages
       </span>
       `
-      $('.grid-container').append(
-         bookContainer
-      )
-   }
+   $('.grid-container').append(
+      bookContainer
+   )
+   bindEditAndDeleteFunc(book)
 }
 
-function updateLocalStorage() {
-   localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
-}
+
+
+
 
 /**
  * Create a star container that contains the star rating of the book
@@ -77,64 +136,59 @@ async function createStarsContainer(stars) {
 
    return starsContainer.outerHTML
 }
-/** 
- * Append newly added book to the grid container
- *  
-*/
-async function renderNewBook(book) {
-   const bookContainer = document.createElement('div')
-   bookContainer.classList.add('book-card')
-   bookContainer.innerHTML = `
-      <h3 class="book-title">${book.title}</h3>
-      <h4 class="book-author">${book.author}</h4>
-      ${await createStarsContainer(book.stars)}
-      <span class="book-pageCount">
-      ${book.pageCount} Pages
-      </span>
-      `
-   $('.grid-container').append(
-      bookContainer
+
+function getModalValuesAsBook() {
+   const title = $('#title-input').val()
+   const author = $('#author-input').val();
+   let stars = $('.modal-star-container input[type=radio]:checked').attr('id')
+   stars = parseInt(stars[stars.length - 1])
+   stars = (5 - stars) + 1;
+   const pageCount = parseInt($('#pageCount').val())
+   const pageCompleted = parseInt($('#pageCompleted').val())
+   if (pageCompleted > pageCount) {
+      alert("Page completed should be less than book's page count!")
+      return false;
+   }
+   const book = new Book(
+      currentlyEditingBookID,
+      title,
+      author,
+      stars,
+      pageCount,
+      pageCompleted
    )
+   return book
 }
+
 
 
 $(document).ready(function () {
    $('#add-book-card').click(function () {
       $('.modal-container').addClass('show-modal');
-
+      $('#modal-form').trigger("reset")
    })
 
    $('#close').click(function () {
       $('.modal-container').removeClass('show-modal');
+      currentlyEditingBookID = null
    })
+
 
    $('#modal-form').submit(function (e) {
 
-      const title = $('#title-input').val()
-      const author = $('#author-input').val();
-      let stars = $('.modal-star-container input[type=radio]:checked').attr('id')
-      stars = parseInt(stars[stars.length - 1])
-      stars = (5 - stars) + 1;
-      const pageCount = parseInt($('#pageCount').val())
-      const pageCompleted = parseInt($('#pageCompleted').val())
-      if (pageCompleted > pageCount) {
-         alert("Page completed should be less than book's page count!")
-         return false;
+      let book = getModalValuesAsBook()
+      if (currentlyEditingBookID === null) {
+         addBookFromInputFormToLibrary(book)
+      } else {
+         saveBookEditToLibrary(book)
       }
-      const newBook = new Book(
-         0,
-         title,
-         author,
-         stars,
-         pageCount,
-         pageCompleted
-      )
-      alert("New Book Added!")
-      addBookFromInputFormToLibrary(newBook)
-      renderNewBook(newBook)
       updateLocalStorage()
+      renderAllBooks()
+
       //Close the modal
       $('.modal-container').removeClass('show-modal');
       return false;
    })
 })
+
+

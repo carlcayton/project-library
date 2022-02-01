@@ -25,24 +25,24 @@
       },
       {
          "id": 4,
-         "title": "Pride and Prejudice",
-         "author": "Jane Austen",
+         "title": "Harry Potter 1",
+         "author": "J.K. Rowling",
          "stars": 4,
-         "pageCount": 99,
-         "pageCompleted": 81
+         "pageCount": 302,
+         "pageCompleted": 65
       },
       {
          "id": 5,
-         "title": "Pride and Prejudice",
-         "author": "Jane Austen",
+         "title": "The Catcher in the Rye",
+         "author": "J. D. Salinger",
          "stars": 1,
          "pageCount": 99,
          "pageCompleted": 81
       },
       {
          "id": 6,
-         "title": "Pride and Prejudice",
-         "author": "Jane Austen",
+         "title": "A Brief History of Time",
+         "author": "Stephen Hawking",
          "stars": 5,
          "pageCount": 99,
          "pageCompleted": 81

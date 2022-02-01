@@ -125,6 +125,32 @@ nav .search-bar span {
   cursor: pointer;
 }
 
+.book-card-btns-container {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  -ms-grid-column-align: end;
+      justify-self: end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  text-align: right;
+  margin-top: -10%;
+}
+
+.edit-btn,
+.delete-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-btn .fas fa-edit,
+.delete-btn .fas fa-edit {
+  height: 10px;
+  width: 30px;
+}
+
 .checked {
   color: #fd4;
 }
