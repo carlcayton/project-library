@@ -27,16 +27,14 @@ async function addBooksFromDBToLibrary() {
    return bookArray
 }
 
+
+
 function addBookFromInputFormToLibrary(newBook) {
    newBook.id = myLibrary.length + 1
    myLibrary.push(newBook)
 }
 
-function saveBookEditToLibrary(book) {
-   myLibrary = myLibrary.map(obj => (obj.id === book.id ? book : obj))
-   // ; (obj.id !== book.id ? obj : book)
 
-}
 
 async function renderAllBooks() {
    //Remove all elements except add-book-card and its children
@@ -73,7 +71,17 @@ function editBook(event) {
 
 function deleteBook(event) {
    let book = event.currentTarget.myParam;
+   myLibrary = myLibrary.filter(obj => obj.id !== book.id)
+   updateLocalStorage()
+   renderAllBooks()
+}
 
+function saveBookEditToLibrary(book) {
+   myLibrary = myLibrary.map(obj => (obj.id === book.id ? book : obj))
+}
+
+function removeJSAndHTMLTags(string){
+   
 }
 
 
@@ -84,7 +92,7 @@ function deleteBook(event) {
 */
 async function renderBook(book) {
 
-   const bookContainer = document.createElement('div')
+   let bookContainer = document.createElement('div')
    bookContainer.classList.add('book-card')
    bookContainer.innerHTML = `
       <div class="book-card-btns-container">
@@ -96,13 +104,22 @@ async function renderBook(book) {
             <i class="fas fa-trash"></i>
          </button>
       </div>
-      <h3 class="book-title">${book.title}</h3>
+      <h3 class="book-title">${(book.title)}</h3>
       <h4 class="book-author">${book.author}</h4>
       ${await createStarsContainer(book.stars)}
       <span class="book-pageCount">
       ${book.pageCount} Pages
       </span>
+      
       `
+   let bookProgressContainer = document.createElement('div')
+   bookProgressContainer.classList.add('book-progress')
+   bookProgressContainer.style.backgroundColor = '#DD517E'
+   bookProgressContainer.innerHTML = `
+   <span>${(book.pageCompleted / book.pageCount).toFixed(2) * 100}%</span>
+   `
+
+   bookContainer.appendChild(bookProgressContainer)
    $('.grid-container').append(
       bookContainer
    )
@@ -141,12 +158,17 @@ function getModalValuesAsBook() {
    const title = $('#title-input').val()
    const author = $('#author-input').val();
    let stars = $('.modal-star-container input[type=radio]:checked').attr('id')
+   if (!stars) {
+      Swal.fire("Add star rating to the book!")
+      return false
+   }
    stars = parseInt(stars[stars.length - 1])
    stars = (5 - stars) + 1;
+
    const pageCount = parseInt($('#pageCount').val())
    const pageCompleted = parseInt($('#pageCompleted').val())
    if (pageCompleted > pageCount) {
-      alert("Page completed should be less than book's page count!")
+      Swal.fire("Page completed should be less than book's page count!")
       return false;
    }
    const book = new Book(
