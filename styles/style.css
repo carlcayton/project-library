@@ -125,11 +125,9 @@ nav .search-bar span {
   border-radius: 0 0 5px 5px;
   width: 100%;
   height: 15%;
-  padding: 0%;
+  margin-left: -5%;
   -webkit-transition: 0.5s ease-out;
   transition: 0.5s ease-out;
-  background: -webkit-gradient(linear, left top, right top, color-stop(50%, #dd517e), color-stop(0, transparent));
-  background: linear-gradient(to right, #dd517e 50%, transparent 0);
   background-size: 200% 100%;
   background-position: right;
   -webkit-animation: makeItfadeIn 1.5s 1s forwards;

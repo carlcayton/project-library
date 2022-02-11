@@ -80,8 +80,8 @@ function saveBookEditToLibrary(book) {
    myLibrary = myLibrary.map(obj => (obj.id === book.id ? book : obj))
 }
 
-function removeJSAndHTMLTags(string){
-   
+function removeJSAndHTMLTags(string) {
+
 }
 
 
@@ -110,14 +110,20 @@ async function renderBook(book) {
       <span class="book-pageCount">
       ${book.pageCount} Pages
       </span>
-      
       `
+
    let bookProgressContainer = document.createElement('div')
    bookProgressContainer.classList.add('book-progress')
-   bookProgressContainer.style.backgroundColor = '#DD517E'
+   let bookCompletedPercent = (book.pageCompleted / book.pageCount).toFixed(2) * 100;
+   bookProgressContainer.style.background = `linear-gradient(to right, #7EDD51 ${bookCompletedPercent}%, transparent 0)`
+
+   // bookProgressContainer.style.backgroundColor = '#DD517E'
    bookProgressContainer.innerHTML = `
-   <span>${(book.pageCompleted / book.pageCount).toFixed(2) * 100}%</span>
+   <span>
+      ${bookCompletedPercent}%
+   </span>
    `
+
 
    bookContainer.appendChild(bookProgressContainer)
    $('.grid-container').append(
