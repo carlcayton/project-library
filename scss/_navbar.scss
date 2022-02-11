@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Monofett&display=swap");
 
 $bottom-shadow: 3px 5px 2px -2px rgba(0, 0, 0, 0.2);
+$bottom-shadow2: 3px 5px 5px 1px rgba(0, 0, 0, 0.2);
 $logo-font: "Monofett", sans-serif;
 
 * {
@@ -15,11 +16,7 @@ $logo-font: "Monofett", sans-serif;
   font-size: 30px;
   font-weight: bold;
   font-family: $logo-font;
-}
-
-#search-button {
-  max-height: 30px;
-  max-width: 30px;
+  cursor: pointer;
 }
 
 nav {
@@ -30,28 +27,31 @@ nav {
   height: 60px;
   justify-content: space-between;
 
-  .search-bar  {
+  .search-bar {
     height: 35px;
     width: 40%;
     display: flex;
     box-shadow: $bottom-shadow;
     border-radius: 5px;
 
-      input {
-        height: 100%;
-        width: 100%;
-        border: none;
-        outline: none;
-        padding: 0 10px;
-        color: #8c8281;
-        font-size: 16px;
-        border-radius: 5px;
-      }
+    input {
+      height: 100%;
+      width: 100%;
+      border: none;
+      outline: none;
+      padding: 0 10px;
+      color: #8c8281;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+  }
+
+  .search-bar:hover {
+    box-shadow: $bottom-shadow2;
   }
 }
 
-
-nav .search-bar span {
+nav .search-bar button {
   height: 100%;
   width: 10%;
   text-align: center;
@@ -59,6 +59,7 @@ nav .search-bar span {
   border-radius: 0 5px 5px 0;
   cursor: pointer;
   background-color: #556cc9;
+  border: none;
   color: #ffffff;
   font-size: 23px;
   font-weight: normal;

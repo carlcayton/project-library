@@ -10,10 +10,27 @@
   height: 100%;
   width: 60%;
   margin: 0 auto;
+  margin-top: -2%;
   grid-gap: 3em;
 }
 
 //Override default font-family
 .fas {
   font-family: "FontAwesome" !important;
+}
+
+#empty-space-container {
+  display: block;
+  height: 100px;
+  width: 60%;
+  margin: 0 auto;
+
+  span {
+    padding-top: 2%;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    font-size: larger;
+    font-weight: bold;
+  }
 }

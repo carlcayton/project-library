@@ -2,12 +2,56 @@ import { readBooksFromDB } from './helper.js'
 import Book from './classes/Book.js'
 
 const localStorageLibrary = JSON.parse(localStorage.getItem('myLibrary'))
-
 let myLibrary = localStorageLibrary !== null ? localStorageLibrary : await addBooksFromDBToLibrary();
+let currentlyEditingBookID = null;
+let searchResults = []
+
+
+
 updateLocalStorage()
 renderAllBooks();
 
-let currentlyEditingBookID = null;
+document.getElementById('logo').addEventListener('click', function (e) {
+   e.event;
+   window.location.reload();
+   searchResults = []
+})
+
+//Trigger searchBook
+document.getElementById('search-button').addEventListener('click', searchBook)
+document.getElementById('search-input').addEventListener('keyup', function (e) {
+   if (e.key === 'Enter') {
+      searchBook()
+   }
+})
+
+// Query the user search, save it on global var and pass it to render function
+function searchBook() {
+   searchResults = []
+   let searchQueryRaw = document.getElementById('search-input').value
+   let searchQuery = searchQueryRaw.toLowerCase()
+   if (searchQuery == "") {
+      return
+   }
+   for (let book of myLibrary) {
+      const title = book.title.toLowerCase()
+      const author = book.author.toLowerCase()
+      if (title.includes(searchQuery) || author.includes(searchQuery)) {
+         searchResults.push(book)
+      }
+   }
+
+   let searchQueryDetail = document.getElementById('search-query-detail')
+   searchQueryDetail.textContent = `Found ${searchResults.length} search result/s for search - "${searchQueryRaw}"`
+   renderSearchResults(searchResults)
+}
+
+function renderSearchResults(searchResults) {
+   $(".grid-container > *").remove()
+   for (let book of searchResults) {
+      renderBook(book);
+   }
+}
 
 
 async function addBooksFromDBToLibrary() {
@@ -42,7 +86,6 @@ async function renderAllBooks() {
    for (let book of myLibrary) {
       renderBook(book)
    }
-
 }
 
 function updateLocalStorage() {
@@ -72,20 +115,19 @@ function editBook(event) {
 function deleteBook(event) {
    let book = event.currentTarget.myParam;
    myLibrary = myLibrary.filter(obj => obj.id !== book.id)
+
    updateLocalStorage()
+   if (searchResults.length > 0) {
+      searchResults = searchResults.filter(obj => obj.id !== book.id)
+      renderSearchResults(searchResults)
+      return
+   }
    renderAllBooks()
 }
 
 function saveBookEditToLibrary(book) {
    myLibrary = myLibrary.map(obj => (obj.id === book.id ? book : obj))
 }
-
-function removeJSAndHTMLTags(string) {
-
-}
-
-
-
 
 /** 
  * Append book to the grid container
@@ -123,17 +165,12 @@ async function renderBook(book) {
       ${bookCompletedPercent}%
    </span>
    `
-
-
    bookContainer.appendChild(bookProgressContainer)
    $('.grid-container').append(
       bookContainer
    )
    bindEditAndDeleteFunc(book)
 }
-
-
-
 
 
 /**
@@ -211,6 +248,12 @@ $(document).ready(function () {
          saveBookEditToLibrary(book)
       }
       updateLocalStorage()
+      if (searchResults.length > 0) {
+         searchResults = searchResults.map(obj => (obj.id === book.id ? book : obj))
+         renderSearchResults(searchResults)
+         $('.modal-container').removeClass('show-modal');
+         return false
+      }
       renderAllBooks()
 
       //Close the modal
@@ -218,5 +261,6 @@ $(document).ready(function () {
       return false;
    })
 })
+
 
 
